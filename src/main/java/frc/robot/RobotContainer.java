@@ -44,6 +44,9 @@ public class RobotContainer {
 
     private final Telemetry logger = new Telemetry(MaxSpeed);
     private final CommandXboxController joystick = new CommandXboxController(0);
+    private final CommandXboxController joysticks = new CommandXboxController(0);
+
+    
     public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
 
     /* Instantiate Shooter subsystem */
@@ -98,13 +101,13 @@ public class RobotContainer {
 
         // Shooter command bindings:
         // Right trigger: while held, run shooter using the left Y-axis value.
-        joystick.rightTrigger().whileTrue(new RunCommand(
+        joysticks.rightTrigger().whileTrue(new RunCommand(
             () -> shooter.shoot(joystick.getLeftY()),
             shooter
         ));
 
         // Left trigger: while held, stop the shooter by setting its speed to 0.
-        joystick.leftTrigger().whileTrue(new RunCommand(
+        joysticks.leftTrigger().whileTrue(new RunCommand(
             () -> shooter.shoot(0),
             shooter
         ));
